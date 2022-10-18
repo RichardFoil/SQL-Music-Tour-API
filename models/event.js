@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Event.init({
-    event_id: {
+    events_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    event_name: {
+    events_name: {
       type: DataTypes.STRING,
       allowNull: false
     },

@@ -11,7 +11,7 @@ events.get('/', async (req, res) => {
         const foundEvents = await Event.findAll({
             order: [ [ 'date', 'ASC' ] ],
             where: {
-                event_name: { [Op.like]: `%${req.query.event_name ? req.query.event_name : ''}%` }
+                events_name: { [Op.like]: `%${req.query.events_name ? req.query.events_name : ''}%` }
             }
         })
         res.status(200).json(foundEvents)
@@ -20,19 +20,19 @@ events.get('/', async (req, res) => {
     }
 })
 
-// FIND A SPECIFIC Event
+// FIND A SPECIFIC EVENT
 events.get('/:id', async (req, res) => {
     try {
-        const foundEvents = await Event.findOne({
-            where: { event_id: req.params.id }
+        const foundEvent = await Event.findOne({
+            where: { events_id: req.params.id }
         })
-        res.status(200).json(foundEvents)
+        res.status(200).json(foundEvent)
     } catch (error) {
         res.status(500).json(error)
     }
 })
 
-// CREATE An Event
+// CREATE AN EVENT
 events.post('/', async (req, res) => {
     try {
         const newEvent = await Event.create(req.body)
@@ -45,12 +45,12 @@ events.post('/', async (req, res) => {
     }
 })
 
-// UPDATE An event
+// UPDATE AN EVENT
 events.put('/:id', async (req, res) => {
     try {
         const updatedEvents = await Event.update(req.body, {
             where: {
-                event_id: req.params.id
+                events_id: req.params.id
             }
         })
         res.status(200).json({
@@ -61,12 +61,12 @@ events.put('/:id', async (req, res) => {
     }
 })
 
-// DELETE An Event
+// DELETE AN EVENT
 events.delete('/:id', async (req, res) => {
     try {
         const deletedEvents = await Event.destroy({
             where: {
-                event_id: req.params.id
+                events_id: req.params.id
             }
         })
         res.status(200).json({
@@ -76,8 +76,6 @@ events.delete('/:id', async (req, res) => {
         res.status(500).json(err)
     }
 })
-
-
 
 // EXPORT
 module.exports = events
